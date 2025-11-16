@@ -21,7 +21,7 @@
 /* Dark Mode */
 :root.dark {
   --primary-h: 243;
-  --link-color: hsl(var(--primary-h), 73%, 65%);
+  --link-color: hsl(var(--primary-h), 73%, 80%);
   --link-hover-color: #818cf8;
   --time-color: #a78bfa;
   --background-color: #1a0a4e;
