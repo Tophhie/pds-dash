@@ -11,6 +11,7 @@
   import type { ComAtprotoRepoListRecords } from "@atcute/client/lexicons";
   import Heatmap from "svelte5-heatmap";
   import ContributorsModal from "./lib/ContributorsModal.svelte";
+  import DarkModeToggle from "./lib/DarkModeToggle.svelte";
 
   let showModal = false;
   
@@ -168,6 +169,9 @@
       {/each}
     </ul>
   </ContributorsModal>
+
+  <!-- Dark Mode Toggle -->
+  <DarkModeToggle />
 </main>
 
 <style>

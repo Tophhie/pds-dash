@@ -30,6 +30,8 @@
 		border-radius: 20px;
 		border: none;
 		padding: 0;
+		background-color: var(--content-background-color);
+		color: var(--text-color);
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
@@ -61,5 +63,15 @@
 	}
 	button {
 		display: block;
+		background-color: var(--link-color);
+		color: white;
+		border: none;
+		transition: background-color 0.2s ease;
+	}
+	button:hover {
+		background-color: var(--link-hover-color);
+	}
+	hr {
+		border-color: var(--border-color);
 	}
 </style>
