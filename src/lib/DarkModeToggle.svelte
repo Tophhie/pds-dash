@@ -1,30 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { isDark } from './theme';
 
-  let isDark = $state(false);
-
-  // Check for saved preference or system preference
+  // onMount: initialise the store value
   onMount(() => {
     const saved = localStorage.getItem('darkMode');
     if (saved !== null) {
-      isDark = saved === 'true';
+      isDark.set(saved === 'true');
     } else {
-      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      isDark.set(window.matchMedia('(prefers-color-scheme: dark)').matches);
     }
     applyTheme();
   });
 
   function applyTheme() {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    $isDark
+      ? document.documentElement.classList.add('dark')
+      : document.documentElement.classList.remove('dark');
   }
 
   function toggleDarkMode() {
-    isDark = !isDark;
-    localStorage.setItem('darkMode', isDark.toString());
+    isDark.update(v => {
+      const next = !v;
+      localStorage.setItem('darkMode', next.toString());
+      return next;
+    });
     applyTheme();
   }
 </script>

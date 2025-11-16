@@ -12,6 +12,7 @@
   import Heatmap from "svelte5-heatmap";
   import ContributorsModal from "./lib/ContributorsModal.svelte";
   import DarkModeToggle from "./lib/DarkModeToggle.svelte";
+  import { isDark } from './lib/theme';
 
   let showModal = false;
   
@@ -108,7 +109,18 @@
     {:else}
       <div id="Account">
         <div>
-          <img src="https://blob.tophhie.cloud/tophhiecloud-resources/Logos/tophhiecloud-colour.png" height=50 alt="Tophhie Social Logo" id="Logo" style="padding-top:15px;" />
+
+          <img
+            src={
+              $isDark
+                ? "https://blob.tophhie.cloud/tophhiecloud-resources/Logos/tophhiecloud-white.png"
+                : "https://blob.tophhie.cloud/tophhiecloud-resources/Logos/tophhiecloud-colour.png"
+            }
+            height="50"
+            alt="Tophhie Social Logo"
+            id="Logo"
+            style="padding-top:15px;"
+          />
           <h1 onclick={carameldansenfusion} id="Header">Tophhie Social</h1>
           <p>Home to {accountsData.length} accounts/repos 🎉</p>
         </div>
