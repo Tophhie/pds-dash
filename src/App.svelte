@@ -48,34 +48,35 @@
     }
   };
 
-  onMount(async () => {
-    try {
-      accountsData = await getAllMetadataFromPds();
-      accountsLoaded = true;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        accountsError = error;
-      } else {
-        accountsError = new Error(String(error));
-      }
-    }
+onMount(async () => {
+  try {
+    // Load critical data first
+    accountsData = await getAllMetadataFromPds();
+    accountsLoaded = true;
+  } catch (error: unknown) {
+    accountsError = error instanceof Error ? error : new Error(String(error));
+  }
 
-    const initialPosts = await getNextPosts();
-    posts = [...posts, ...initialPosts];
-    postsLoaded = true;
+  getNextPosts()
+    .then(initialPosts => {
+      posts = [...posts, ...initialPosts];
+      postsLoaded = true;
+    })
+    .catch(err => console.error("Error fetching posts:", err));
 
-    try {
-      heatmapData = await getHeatmapData()
-    } catch (error) {
-      console.error("Error fetching heatmap data:", error);
-    }
+  getHeatmapData()
+    .then(data => {
+      heatmapData = data;
+    })
+    .catch(err => console.error("Error fetching heatmap data:", err));
 
-    try {
-      contributors = await getContributors();
-    } catch (error) {
-      console.error("Error fetching contributors:", error)
-    }
-  });
+  getContributors()
+    .then(data => {
+      contributors = data;
+    })
+    .catch(err => console.error("Error fetching contributors:", err));
+});
+
 
 
   const onInfinite = ({
