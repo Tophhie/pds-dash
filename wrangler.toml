@@ -1,6 +1,6 @@
 name = "pds-dash"
 compatibility_date = "2025-11-25"
-workers_dev = false
+workers_dev = true
 preview_urls = false
 
 [assets]
