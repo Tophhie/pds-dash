@@ -4,18 +4,14 @@ a frontend dashboard with stats for your ATProto PDS.
 
 ## setup
 
-### prerequisites
-
-- [deno](https://deno.com/manual/getting_started/installation)
-
 ### installing
 
 clone the repo, copy `config.ts.example` to `config.ts` and edit it to your liking.
 
-then, install dependencies using deno:
+then, install dependencies using npm:
 
 ```sh
-deno install
+npm install
 ```
 
 ### development server
@@ -23,7 +19,7 @@ deno install
 local develompent server with hot reloading:
 
 ```sh
-deno task dev
+npm run dev
 ```
 
 ### building
@@ -31,7 +27,7 @@ deno task dev
 to build the optimized bundle run:
 
 ```sh
-deno task build
+npm run build
 ```
 
 the output will be in the `dist/` directory.

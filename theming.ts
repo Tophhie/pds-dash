@@ -1,32 +1,37 @@
-import { Plugin } from 'vite';
+
+// theming.ts
+import type { Plugin } from 'vite';
 import { Config } from './config';
+import fs from 'fs';
+import path from 'path';
 
-
-// Replaces app.css with the contents of the file specified in the
-// config file.
+// Replaces app.css with the contents of the file specified in the config file.
 export const themePlugin = (): Plugin => {
-    const themeFolder = Config.THEME;
-    console.log(`Using theme folder: ${themeFolder}`);
-    return {
-        name: 'theme-generator',
-        enforce: 'pre', // Ensure this plugin runs first
-        transform(code, id) {
-            if (id.endsWith('app.css')) {
-                // Read the theme file and replace the contents of app.css with it
-                // Needs full path to the file
-                const themeCode = Deno.readTextFileSync(Deno.cwd() + '/themes/' + themeFolder + '/theme.css');
-                // Replace the contents of app.css with the theme code
+  const themeFolder = Config.THEME;
+  const cwd = process.cwd();
+  const themeCssPath = path.resolve(cwd, 'themes', themeFolder, 'theme.css');
 
-                // and add a comment at the top
-                const themeComment = `/* Generated from ${themeFolder} */\n`;
-                const themeCodeWithComment = themeComment + themeCode;
-                // Return the theme code as the new contents of app.css
-                return {
-                    code: themeCodeWithComment,
-                    map: null,
-                };
-            }
-            return null;
-        }
-    };
+  console.log(`Using theme folder: ${themeFolder}`);
+  console.log(`Resolved theme CSS path: ${themeCssPath}`);
+
+  return {
+    name: 'theme-generator',
+    enforce: 'pre', // Ensure this plugin runs first
+    transform(code, id) {
+      if (id.endsWith('app.css')) {
+        // Read the theme file and replace the contents of app.css with it
+        const themeCode = fs.readFileSync(themeCssPath, { encoding: 'utf-8' });
+
+        // Add a comment header
+        const themeComment = `/* Generated from ${themeFolder} */\n`;
+        const themeCodeWithComment = themeComment + themeCode;
+
+        return {
+          code: themeCodeWithComment,
+          map: null,
+        };
+      }
+      return null;
+    },
+  };
 };
