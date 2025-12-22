@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script lang="ts">
+  window.ZOHOIM=window.ZOHOIM||function(a,b){ZOHOIM[a]=b;};window.ZOHOIM.prefilledMessage="";(function(){var d=document;var s=d.createElement('script');s.type='text/javascript';s.nonce='7232560246';s.defer=true;s.src="https://im.zoho.eu/api/v1/public/channel/3cd7bfa34e04555089f0c7dbfe57ed64/widget";d.getElementsByTagName('head')[0].appendChild(s); })()
+
   import PostComponent from "./lib/PostComponent.svelte";
   import AccountComponent from "./lib/AccountComponent.svelte";
   import InfiniteLoading from "svelte-infinite-loading";
