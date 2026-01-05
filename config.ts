@@ -30,6 +30,20 @@ export class Config {
   static readonly MAX_POSTS: number = 100;
 
   /**
+   * Number of posts to request per-user per fetch.
+   * Keeps individual requests small to improve latency.
+   * @default 5
+   */
+  static readonly POSTS_BATCH_SIZE: number = 5;
+
+  /**
+   * Number of accounts to fetch per getNextPosts invocation.
+   * This spaces work across multiple infinite-scroll calls.
+   * @default 10
+   */
+  static readonly ACCOUNTS_PER_BATCH: number = 10;
+
+  /**
    * Footer text for the dashboard, you probably want to change this. Supports HTML.
    * @default "<a href='https://git.witchcraft.systems/scientific-witchery/pds-dash' target='_blank'>Source</a> (<a href='https://github.com/witchcraft-systems/pds-dash/' target='_blank'>github mirror</a>)"
    */

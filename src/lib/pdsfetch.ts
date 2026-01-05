@@ -28,6 +28,8 @@ interface AccountMetadata {
 }
 
 let accountsMetadata: AccountMetadata[] = [];
+let accountFetchIndex = 0;
+let initialFetchDone = false;
 
 interface atUriObject {
   repo: string;
@@ -316,13 +318,38 @@ const getNextPosts = async (): Promise<Post[]> => {
     if (!accountsMetadata.length) {
       accountsMetadata = await getAllMetadataFromPds();
     }
+    if (!accountsMetadata.length) {
+      return [];
+    }
+    // Fetch posts for a subset of accounts (batch) to reduce per-call load
+    const accountsPerBatch = Config.ACCOUNTS_PER_BATCH || 10;
+    let accountsToFetch: AccountMetadata[];
 
-    // Fetch posts for all accounts
+    // On the first fetch, query all accounts but with a small per-account limit
+    if (!initialFetchDone) {
+      accountsToFetch = accountsMetadata.slice();
+      initialFetchDone = true;
+    } else {
+      const start = accountFetchIndex;
+      const end = start + accountsPerBatch;
+      if (end <= accountsMetadata.length) {
+        accountsToFetch = accountsMetadata.slice(start, end);
+      } else {
+        accountsToFetch = accountsMetadata.slice(start).concat(
+          accountsMetadata.slice(0, end % accountsMetadata.length),
+        );
+      }
+
+      // Advance the rotating index for the next invocation
+      accountFetchIndex = (accountFetchIndex + accountsToFetch.length) % accountsMetadata.length;
+    }
+
     const postsAcc: PostsAcc[] = await Promise.all(
-      accountsMetadata.map(async (account) => {
+      accountsToFetch.map(async (account) => {
         const result = await fetchPostsForUser(
           account.did,
-          account.currentCursor || null
+          account.currentCursor || null,
+          Config.POSTS_BATCH_SIZE,
         );
 
         const records = result?.records ?? [];
@@ -336,7 +363,7 @@ const getNextPosts = async (): Promise<Post[]> => {
           posts: records,
           account,
         };
-      })
+      }),
     );
 
     // Flatten posts
@@ -388,13 +415,13 @@ const getNextPosts = async (): Promise<Post[]> => {
   }
 };
 
-const fetchPostsForUser = async (did: At.Did, cursor: string | null) => {
+const fetchPostsForUser = async (did: At.Did, cursor: string | null, limit: number = Config.POSTS_BATCH_SIZE) => {
   try {
     const { data } = await rpc.get("com.atproto.repo.listRecords", {
       params: {
         repo: did as At.Identifier,
         collection: "app.bsky.feed.post",
-        limit: Config.MAX_POSTS,
+        limit: limit,
         cursor: cursor || undefined,
       },
     });
