@@ -116,8 +116,8 @@ onMount(async () => {
           <img
             src={
               $isDark
-                ? "https://blob.tophhie.cloud/tophhiecloud-resources/Logos/tophhiecloud-white.png"
-                : "https://blob.tophhie.cloud/tophhiecloud-resources/Logos/tophhiecloud-colour.png"
+                ? "https://public-blob.tophhie.cloud/logos/tophhiecloud-white.png"
+                : "https://public-blob.tophhie.cloud/logos/tophhiecloud-colour.png"
             }
             height="50"
             alt="Tophhie Social Logo"
