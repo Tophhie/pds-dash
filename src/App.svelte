@@ -130,7 +130,7 @@ onMount(async () => {
         <div class="button-group">
           <a href="https://signup.tophhie.social" class="call-to-action">Sign up now!</a>
           <a href="https://migrate.tophhie.social" class="call-to-action">Migrate your Bluesky account!</a>
-          <a href="https://aka.tophhie.cloud/socialcommunitysignup" class="call-to-action">Join the Tophhie Social Community!</a>
+          <a href="https://discord.gg/YD8sF8JsCJ" class="call-to-action">Join the Tophhie Cloud Discord server!</a>
           <a href="https://status.tophhie.social" class="call-to-action">Server Status</a>
         </div>
         <div id="accountsList">
