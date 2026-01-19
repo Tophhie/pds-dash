@@ -24,6 +24,10 @@
   let heatmapData: Record<string, number> = {};
   let year = new Date().getFullYear();
   let accountsData: any[] = [];
+  $: latestVisibleAccount = accountsData
+    ?.slice()
+    .reverse()
+    .find(a => a?.hiddenFromHomepage !== true);
   let accountsError: Error | null = null;
   let accountsLoaded = false;
 
@@ -155,8 +159,8 @@ onMount(async () => {
           <Heatmap data={heatmapData} {year} lday={false} lmonth={window.innerWidth >= 768} />
         </div>
       {/if}
-      {#if accountsLoaded}
-        <AccountComponent account={accountsData[accountsData.length - 1]} welcome />
+      {#if accountsLoaded && latestVisibleAccount}
+        <AccountComponent account={latestVisibleAccount} welcome />
       {/if}
       {#each posts as postObject}
         <PostComponent post={postObject as Post} />
