@@ -135,7 +135,9 @@ onMount(async () => {
         </div>
         <div id="accountsList">
           {#each accountsData as accountObject}
-            <AccountComponent account={accountObject} />
+            {#if !accountObject.hiddenFromHomepage}
+              <AccountComponent account={accountObject} />
+            {/if}
           {/each}
         </div>
         <p class="disclaimer-footer">

@@ -25,6 +25,7 @@ interface AccountMetadata {
   avatarCid: string | null;
   currentCursor?: string;
   deactivated?: boolean;
+  hiddenFromHomepage: boolean;
 }
 
 let accountsMetadata: AccountMetadata[] = [];
@@ -171,6 +172,7 @@ const getAccountMetadata = async (
     displayName: "",
     avatarCid: null,
     deactivated: false,
+    hiddenFromHomepage: false,
   };
 
   try {
@@ -188,6 +190,20 @@ const getAccountMetadata = async (
     }
   } catch (e) {
     console.warn(`Error fetching profile for ${did}:`, e);
+  }
+
+  try {
+     const { data } = await rpc.get("com.atproto.repo.getRecord", {
+      params: {
+        repo: did,
+        collection: "social.tophhie.profile",
+        rkey: "self",
+      },
+    });
+    const value = (data.value as any).pdsPreferences.showOnHomepage;
+    account.hiddenFromHomepage = value === false;
+  } catch {
+    // Ignore errors, as this record may not exist
   }
 
   try {
@@ -346,6 +362,12 @@ const getNextPosts = async (): Promise<Post[]> => {
 
     const postsAcc: PostsAcc[] = await Promise.all(
       accountsToFetch.map(async (account) => {
+        if (account.hiddenFromHomepage) {
+          return {
+            posts: [],
+            account,
+          };
+        }
         const result = await fetchPostsForUser(
           account.did,
           account.currentCursor || null,
