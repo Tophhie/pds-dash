@@ -136,7 +136,7 @@ onMount(async () => {
           <a href="https://migrate.tophhie.social" class="call-to-action">Migrate your Bluesky account!</a>
           <a href="https://discord.gg/YD8sF8JsCJ" class="call-to-action">Join the Tophhie Cloud Discord server!</a>
           <a href="https://status.tophhie.social" class="call-to-action">Server Status</a>
-          <a href="https://ko-fi.com/tophhie" class="call-to-action">Support us and donate</a>
+          <a href="https://aka.tophhie.cloud/tsdonate" class="call-to-action">Support us and donate</a>
         </div>
         <div id="accountsList">
           {#each accountsData as accountObject}
