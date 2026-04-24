@@ -108,6 +108,13 @@ onMount(async () => {
 </script>
 
 <main>
+  <!-- Decorative background circle motif from brand identity -->
+  <div class="bg-circles" aria-hidden="true">
+    <div class="bg-circle bg-circle--lg"></div>
+    <div class="bg-circle bg-circle--md"></div>
+    <div class="bg-circle bg-circle--sm"></div>
+  </div>
+
   <div id="Content">
     {#if !accountsLoaded && !accountsError}
       <p>Loading...</p>
@@ -123,10 +130,10 @@ onMount(async () => {
                 ? "https://public-blob.tophhie.cloud/logos/tophhiecloud-white.png"
                 : "https://public-blob.tophhie.cloud/logos/tophhiecloud-colour.png"
             }
-            height="50"
-            alt="Tophhie Social Logo"
+            height="44"
+            alt="Tophhie Cloud"
             id="Logo"
-            style="padding-top:15px;"
+            style="padding-top:12px;"
           />
           <h1 onclick={carameldansenfusion} id="Header">Tophhie Social</h1>
           <p>Home to {accountsData.length} accounts/repos 🎉</p>
@@ -198,4 +205,58 @@ onMount(async () => {
 </main>
 
 <style>
+  /* Background decorative circles — brand identity motif */
+  .bg-circles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--color-bg-circle);
+  }
+
+  .bg-circle--lg {
+    width: 520px;
+    height: 520px;
+    top: -130px;
+    right: -90px;
+    opacity: 0.7;
+  }
+
+  .bg-circle--md {
+    width: 320px;
+    height: 320px;
+    top: 320px;
+    right: 210px;
+    opacity: 0.5;
+  }
+
+  .bg-circle--sm {
+    width: 180px;
+    height: 180px;
+    bottom: 60px;
+    right: 90px;
+    opacity: 0.4;
+  }
+
+  main {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Ensure content sits above the decorative circles */
+  :global(#Content),
+  :global(dialog) {
+    position: relative;
+    z-index: 1;
+  }
+
+  :global(#Logo) {
+    filter: drop-shadow(0 2px 8px rgba(232, 0, 90, 0.15));
+  }
 </style>

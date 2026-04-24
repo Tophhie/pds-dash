@@ -1,41 +1,133 @@
-/* Modern Theme for pds-dash */
+/* ============================================================
+   Tophhie Cloud — Design System Theme
+   ============================================================ */
 
+/* === Design Tokens === */
 :root {
-  /* Modern color palette - Light Mode */
-  --primary-h: 243;
-  --link-color: hsl(var(--primary-h), 73%, 59%);
-  --link-hover-color: #4338ca;
-  --time-color: #8b5cf6;
-  --background-color: #100235;
-  --header-background-color: #ffffff;
-  --content-background-color: #ffffff;
-  --text-color: #111827;
-  --text-secondary-color: #4b5563;
-  --border-color: #e2e8f0;
-  --indicator-inactive-color: #cbd5e1;
-  --indicator-active-color: #6366f1;
-  --button-hover: #f3f4f6;
-  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  /* Primary hue (brand pink ≈ 340°) — cycled by the easter egg */
+  --primary-h: 340;
+
+  /* Brand */
+  --color-brand-pink:       #E8005A;
+  --color-brand-pink-light: #FF2E7A;
+  --color-brand-pink-dim:   #B3004A;
+  --color-brand-purple:     #8B0060;
+  --color-brand-magenta:    #C4004E;
+
+  /* Surfaces — light mode */
+  --color-bg:          #faf8ff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-subtle:   #f0ebff;
+  --color-bg-circle:   #e0d8ff;
+  --color-bg-overlay:  rgba(10, 2, 40, 0.60);
+
+  /* Foreground — light mode */
+  --color-fg-primary:   #1a0a3d;
+  --color-fg-secondary: rgba(26, 10, 61, 0.60);
+  --color-fg-tertiary:  rgba(26, 10, 61, 0.35);
+  --color-fg-disabled:  rgba(26, 10, 61, 0.20);
+
+  /* Borders — light mode */
+  --color-border:        rgba(26, 10, 61, 0.10);
+  --color-border-strong: rgba(26, 10, 61, 0.18);
+  --color-border-brand:  rgba(196, 0, 78, 0.30);
+
+  /* Semantic */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger:  #dc2626;
+  --color-info:    #2563eb;
+
+  /* Typography */
+  --font-display: 'Nunito', 'Varela Round', sans-serif;
+  --font-body:    'DM Sans', 'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Shadows — light mode */
+  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-glow-brand: 0 0 24px rgba(196, 0, 78, 0.15);
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  20px;
+  --radius-full: 9999px;
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* === Legacy aliases — used by existing components === */
+  --background-color:         var(--color-bg);
+  --header-background-color:  var(--color-bg-elevated);
+  --content-background-color: var(--color-bg-elevated);
+  --text-color:               var(--color-fg-primary);
+  --text-secondary-color:     var(--color-fg-secondary);
+  --border-color:             var(--color-border);
+  --link-color:               hsl(var(--primary-h), 100%, 38%);
+  --link-hover-color:         hsl(var(--primary-h), 100%, 45%);
+  --time-color:               var(--color-fg-secondary);
+  --indicator-inactive-color: var(--color-fg-disabled);
+  --indicator-active-color:   var(--color-brand-magenta);
+  --button-hover:             var(--color-bg-subtle);
+  --card-shadow:              var(--shadow-md);
 }
 
-/* Dark Mode */
+/* === Dark mode — primary design system surface === */
 :root.dark {
-  --primary-h: 243;
-  --link-color: hsl(var(--primary-h), 73%, 80%);
-  --link-hover-color: #818cf8;
-  --time-color: #a78bfa;
-  --background-color: #1a0a4e;
-  --header-background-color: #1e293b;
-  --content-background-color: #1e293b;
-  --text-color: #f1f5f9;
-  --text-secondary-color: #cbd5e1;
-  --border-color: #334155;
-  --indicator-inactive-color: #475569;
-  --indicator-active-color: #818cf8;
-  --button-hover: #334155;
-  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --primary-h: 340;
+
+  /* Brand (same, just declaring for dark scope) */
+  --color-brand-pink:       #E8005A;
+  --color-brand-pink-light: #FF2E7A;
+  --color-brand-pink-dim:   #B3004A;
+  --color-brand-purple:     #8B0060;
+  --color-brand-magenta:    #C4004E;
+
+  /* Surfaces */
+  --color-bg:          #100235;
+  --color-bg-elevated: #16063F;
+  --color-bg-subtle:   #1C0A52;
+  --color-bg-circle:   #180840;
+  --color-bg-overlay:  rgba(16, 2, 53, 0.85);
+
+  /* Foreground */
+  --color-fg-primary:   #FFFFFF;
+  --color-fg-secondary: rgba(255, 255, 255, 0.65);
+  --color-fg-tertiary:  rgba(255, 255, 255, 0.35);
+  --color-fg-disabled:  rgba(255, 255, 255, 0.20);
+
+  /* Borders */
+  --color-border:        rgba(255, 255, 255, 0.10);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-border-brand:  rgba(232, 0, 90, 0.40);
+
+  /* Semantic */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger:  #EF4444;
+  --color-info:    #3B82F6;
+
+  /* Shadows */
+  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.50);
+  --shadow-glow-brand: 0 0 24px rgba(232, 0, 90, 0.25);
+
+  /* Legacy aliases — dark overrides */
+  --link-color:       hsl(var(--primary-h), 100%, 55%);
+  --link-hover-color: hsl(var(--primary-h), 100%, 68%);
+  --time-color:       rgba(255, 255, 255, 0.65);
 }
 
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
 
 body {
   margin: 0;
@@ -43,32 +135,33 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--background-color);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  font-size: 18px;
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 16px;
   line-height: 1.5;
-  color: var(--text-color);
-  border-color: var(--border-color);
+  color: var(--color-fg-primary);
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--duration-slow), color var(--duration-slow);
 }
 
 a {
   font-weight: 500;
   color: var(--link-color);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--duration-fast);
 }
 a:hover {
   color: var(--link-hover-color);
 }
 
 h1 {
-  font-size: 2.5em;
+  font-family: var(--font-display);
+  font-size: 2.25em;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 #app {
@@ -79,27 +172,26 @@ h1 {
   text-align: center;
 }
 
-/* Post Component */
+/* ============================================================
+   POST COMPONENT
+   ============================================================ */
+
 #postContainer {
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  background-color: var(--content-background-color);
-  margin-bottom: 20px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-elevated);
+  margin-bottom: 16px;
   overflow-wrap: break-word;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-base), box-shadow var(--duration-base), background-color var(--duration-slow);
 }
 
 #postContainer:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-:root.dark #postContainer:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 #postHeader {
@@ -107,19 +199,21 @@ h1 {
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  background-color: var(--header-background-color);
+  background-color: var(--color-bg-elevated);
   padding: 12px 16px;
   height: 60px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--color-border);
   font-weight: 600;
   overflow-wrap: break-word;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--duration-slow);
 }
 
 #displayName {
   display: block;
-  color: var(--text-color);
-  font-size: 1.2em;
+  color: var(--color-fg-primary);
+  font-family: var(--font-body);
+  font-size: 1.05em;
+  font-weight: 600;
   padding: 0;
   margin: 0 0 2px 0;
   text-overflow: ellipsis;
@@ -127,27 +221,27 @@ h1 {
   white-space: nowrap;
   width: 100%;
   letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  transition: color var(--duration-slow);
 }
 
 #handle {
   display: flex;
   align-items: center;
-  color: var(--text-secondary-color);
-  font-size: 0.85em;
+  color: var(--color-fg-secondary);
+  font-size: 0.82em;
   font-weight: 400;
   padding: 0;
   margin: 0;
-  transition: color 0.3s ease;
+  transition: color var(--duration-slow);
 }
 
 #postLink {
-  color: var(--time-color);
-  font-size: 0.85em;
+  color: var(--color-fg-secondary);
+  font-size: 0.82em;
   padding: 0;
   margin: 0;
   opacity: 0.9;
-  transition: color 0.3s ease;
+  transition: color var(--duration-slow);
 }
 
 #postContent {
@@ -155,20 +249,21 @@ h1 {
   text-align: start;
   flex-direction: column;
   padding: 16px;
-  background-color: var(--content-background-color);
-  color: var(--text-color);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-fg-primary);
   overflow-wrap: break-word;
   white-space: pre-line;
-  line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.65;
+  font-size: 0.95em;
+  transition: background-color var(--duration-slow), color var(--duration-slow);
 }
 
 #replyingText, #quotingText {
   font-size: 0.8em;
   margin: 0;
   padding: 0 0 10px 0;
-  color: var(--text-secondary-color);
-  transition: color 0.3s ease;
+  color: var(--color-fg-secondary);
+  transition: color var(--duration-slow);
 }
 
 #postText {
@@ -177,7 +272,6 @@ h1 {
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: none;
-  font-size: 1.05em;
 }
 
 #headerText {
@@ -193,6 +287,7 @@ h1 {
   margin-bottom: auto;
 }
 
+/* Carousel */
 #carouselContainer {
   position: relative;
   width: 100%;
@@ -200,7 +295,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
@@ -221,35 +316,35 @@ h1 {
 .indicator {
   width: 6px;
   height: 6px;
-  background-color: var(--indicator-inactive-color);
-  border-radius: 50%;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  background-color: var(--color-fg-disabled);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-base), transform var(--duration-base);
 }
 
 .indicator.active {
-  background-color: var(--indicator-active-color);
+  background-color: var(--color-brand-pink);
   transform: scale(1.3);
 }
 
 #prevBtn,
 #nextBtn {
-  background-color: var(--content-background-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-fg-primary);
+  border: 1px solid var(--color-border);
   width: 32px;
   height: 32px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.15s ease, transform 0.15s ease, color 0.3s ease;
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast), transform var(--duration-fast), color var(--duration-slow);
   font-size: 16px;
 }
 
 #prevBtn:hover:not(:disabled),
 #nextBtn:hover:not(:disabled) {
-  background-color: var(--button-hover);
+  background-color: var(--color-bg-subtle);
   transform: scale(1.05);
 }
 
@@ -264,7 +359,7 @@ h1 {
   max-width: 500px;
   margin-top: 12px;
   align-self: center;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
@@ -274,56 +369,58 @@ h1 {
   max-height: 500px;
   object-fit: contain;
   margin: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
-/* Account Component */
+/* ============================================================
+   ACCOUNT COMPONENT
+   ============================================================ */
+
 #accountContainer {
   display: flex;
   text-align: start;
   align-items: center;
-  background-color: var(--content-background-color);
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  transition: background-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-bg-elevated);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: background-color var(--duration-fast), transform var(--duration-base), box-shadow var(--duration-base);
 }
 
 #accountContainer:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-:root.dark #accountContainer:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-bg-subtle);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 #accountName {
   margin-left: 12px;
-  font-size: 0.95em;
+  font-size: 0.9em;
+  font-family: var(--font-body);
+  font-weight: 500;
   max-width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 500;
+  color: var(--color-fg-primary);
 }
 
 #avatar {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   margin: 0;
   object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid var(--border-color);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  transition: border-color 0.3s ease;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-strong);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-slow);
+  flex-shrink: 0;
 }
 
-:root.dark #avatar {
-  border-color: var(--border-color);
-}
+/* ============================================================
+   APP LAYOUT
+   ============================================================ */
 
-/* App.Svelte Layout */
 #Content {
   display: flex;
   width: 100%;
@@ -331,17 +428,17 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: transparent;
+  color: var(--color-fg-primary);
   gap: 24px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color var(--duration-slow);
 }
 
 #Feed {
   overflow-y: auto;
   width: 65%;
   height: 89vh;
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   padding-right: 16px;
   align-self: flex-start;
 }
@@ -357,14 +454,27 @@ h1 {
   width: 35%;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border-color);
-  background-color: var(--content-background-color);
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-bg-elevated);
   max-height: 85vh;
   padding: 24px;
   margin-left: 16px;
-  border-radius: 20px;
-  box-shadow: var(--card-shadow);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--duration-slow), border-color var(--duration-slow);
+}
+
+/* Brand accent top edge on sidebar panel */
+#Account::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-brand-pink), var(--color-brand-purple));
 }
 
 #accountsList {
@@ -379,100 +489,71 @@ h1 {
 
 #Header {
   text-align: center;
-  font-size: 1.8em;
+  font-family: var(--font-display);
+  font-size: 1.7em;
   margin-bottom: 16px;
-  font-weight: 700;
-  background: linear-gradient(to right, var(--link-color), #8b5cf6);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(to right, var(--color-brand-pink), var(--color-brand-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  cursor: default;
 }
 
-:root.dark #Header {
-  background: linear-gradient(to right, var(--link-color), #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ============================================================
+   BUTTONS & CTAs
+   ============================================================ */
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
+  padding-bottom: 16px;
 }
 
-/* Mobile Styles */
-@media screen and (max-width: 768px) {
-  #Content {
-    flex-direction: column;
-    width: auto;
-    padding: 12px;
-    margin-top: 0;
-  }
-  
-  #Account {
-    width: calc(100% - 32px);
-    padding: 16px;
-    margin-bottom: 20px;
-    margin-left: 0;
-    margin-right: 0;
-    height: auto;
-    order: -1;
-  }
-  
-  #Feed {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-y: visible;
-  }
-  
-  #spacer {
-    height: 5vh;
-  }
-
-  body {
-    font-size: 16px;
-  }
-
-  #postHeader {
-    padding: 10px;
-    height: auto;
-    min-height: 50px;
-  }
+.call-to-action {
+  display: block;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-align: center;
+  text-decoration: none;
+  background: rgba(232, 0, 90, 0.08);
+  color: var(--link-color);
+  cursor: pointer;
+  border: 1px solid var(--color-border-brand);
+  transition: background var(--duration-base), transform var(--duration-base), box-shadow var(--duration-base);
 }
 
-/* Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-}
-::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 0;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 0;
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
-  border-radius: 0;
-}
-::-webkit-scrollbar-button {
-  background: transparent;
-  border-radius: 0;
+.call-to-action:hover {
+  background: rgba(232, 0, 90, 0.16);
+  color: var(--link-hover-color);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
-* {
-  scrollbar-width: none;
-  scrollbar-color: transparent transparent;
-  -ms-overflow-style: none; /* IE and Edge */
-  -webkit-overflow-scrolling: touch;
-  -webkit-scrollbar: none; /* Safari */
+.call-to-action:active {
+  transform: scale(0.98);
 }
 
+/* ============================================================
+   FOOTER & MISC
+   ============================================================ */
 
-/* Chris's Components CSS */
-.verticalline {
-  border-left: thick solid var(--border-color);
+.disclaimer-footer {
+  font-size: 0.8rem;
+  color: var(--color-fg-tertiary);
+  margin-block-end: 0;
+  text-align: center;
 }
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
 
 .tooltip {
   position: relative;
@@ -481,20 +562,22 @@ h1 {
 }
 
 .tooltiptext {
-  font-size: 0.75em;
+  font-size: 0.72em;
+  font-family: var(--font-mono);
   visibility: hidden;
   width: 280px;
-  background-color: var(--content-background-color);
-  color: var(--text-color);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-fg-secondary);
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
   position: absolute;
   z-index: 1;
   top: -2px;
   right: 130%;
-  border: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+  transition: background-color var(--duration-slow), color var(--duration-slow);
 }
 
 .tooltip:hover .tooltiptext {
@@ -505,12 +588,16 @@ h1 {
   content: " ";
   position: absolute;
   top: 50%;
-  left: 100%; /* To the right of the tooltip */
+  left: 100%;
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent var(--content-background-color);
+  border-color: transparent transparent transparent var(--color-bg-elevated);
 }
+
+/* ============================================================
+   CONTRIBUTORS MODAL LIST
+   ============================================================ */
 
 .contributor-list {
   text-align: left;
@@ -525,49 +612,85 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 6px 0;
 }
 
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  max-width: 100%;
-  padding-bottom: 15px;
+/* ============================================================
+   MOBILE STYLES
+   ============================================================ */
+
+@media screen and (max-width: 768px) {
+  #Content {
+    flex-direction: column;
+    width: auto;
+    padding: 12px;
+    margin-top: 0;
+  }
+
+  #Account {
+    width: calc(100% - 24px);
+    padding: 16px;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    height: auto;
+    order: -1;
+  }
+
+  #Feed {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: visible;
+  }
+
+  #spacer {
+    height: 5vh;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  #postHeader {
+    padding: 10px;
+    height: auto;
+    min-height: 50px;
+  }
 }
 
-.button {
-  background-color: red;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: var(--radius-full); }
+:root:not(.dark) ::-webkit-scrollbar-thumb { background: rgba(26,10,61,0.15); }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
-.call-to-action {
-  display: block;
-  padding: 0.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  text-align: center;
-  text-decoration: none;
-  background: var(--content-background-color);
-  color: var(--link-color);
-  cursor: pointer;
-  border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
+:root:not(.dark) * {
+  scrollbar-color: rgba(26,10,61,0.15) transparent;
 }
 
-.call-to-action:hover {
-  transform: translateY(-2px);
-  background-color: var(--button-hover);
+/* ============================================================
+   CHRIS'S VERTICAL LINE
+   ============================================================ */
+
+.verticalline {
+  border-left: 3px solid var(--color-border-strong);
 }
 
-.disclaimer-footer {
-    font-size: 0.9rem;
-    margin-block-end: 0px;
+/* ============================================================
+   HEATMAP CONTAINER
+   ============================================================ */
+
+#postContainer > div[style*="padding:20px"] {
+  background-color: var(--color-bg-elevated);
 }

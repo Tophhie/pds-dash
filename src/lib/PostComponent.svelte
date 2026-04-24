@@ -414,18 +414,18 @@
 <style>
   /* Avatar placeholder */
   .avatar-placeholder {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--link-color), var(--time-color));
+    background: linear-gradient(135deg, #E8005A, #8B0060);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: 600;
-    font-size: 1.2em;
-    border: 2px solid white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    font-size: 1em;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(232, 0, 90, 0.3);
   }
 
   /* Context badges */
@@ -441,15 +441,15 @@
   }
 
   .reply-badge {
-    background-color: rgba(99, 102, 241, 0.1);
-    color: #6366f1;
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    background-color: rgba(232, 0, 90, 0.08);
+    color: #E8005A;
+    border: 1px solid rgba(232, 0, 90, 0.20);
   }
 
   .quote-badge {
-    background-color: rgba(139, 92, 246, 0.1);
-    color: #8b5cf6;
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background-color: rgba(139, 0, 96, 0.08);
+    color: #8B0060;
+    border: 1px solid rgba(139, 0, 96, 0.20);
   }
 
   .context-badge svg {
@@ -467,7 +467,7 @@
   }
 
   .separator {
-    color: #9ca3af;
+    color: var(--color-fg-tertiary, rgba(255,255,255,0.35));
     margin: 0 4px;
   }
 
@@ -700,8 +700,9 @@
 
   .external-link-domain {
     font-size: 0.8em;
-    color: #9ca3af;
+    color: var(--color-fg-tertiary, rgba(255,255,255,0.35));
     margin: 0;
+    font-family: var(--font-mono, monospace);
   }
 
   /* Mobile responsiveness for lightbox */
