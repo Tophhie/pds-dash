@@ -7,6 +7,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Apply the saved theme before first paint so there's no flash. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "light" && t !== "dark") {
+            var legacy = localStorage.getItem("darkMode");
+            if (legacy === "true") t = "dark";
+            else if (legacy === "false") t = "light";
+          }
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <!-- Backdrop matches the design-system --app-backdrop so the page
+         behind the app never flashes a light surface while loading. -->
+    <style>
+      html { background: #0D0D0D; }
+      html[data-theme="light"] { background: #ECE8F5; }
+      @media (prefers-color-scheme: light) {
+        html:not([data-theme]) { background: #ECE8F5; }
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

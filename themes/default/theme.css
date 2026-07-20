@@ -1,9 +1,24 @@
 /* ============================================================
-   Tophhie Cloud — Design System Theme
+   Tophhie Cloud — Design System Theme  (tokens v1.3.2)
+   ------------------------------------------------------------
+   Dark is the default. Apps that never set data-theme follow
+   the OS via prefers-color-scheme; data-theme="light" | "dark"
+   on <html> always overrides. The dark base is a neutral
+   black/grey — the brand purple (#100235) and pinks are
+   reserved as ACCENTS only (CTA buttons, header, active dots).
    ============================================================ */
 
-/* === Design Tokens === */
+/* --- Box-sizing reset --------------------------------------
+   width:100% + padded components (cards, buttons, inputs) rely
+   on border-box so they fill their slot without overflowing. */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ============================================================
+   DESIGN TOKENS — dark default
+   ============================================================ */
 :root {
+  color-scheme: dark;
+
   /* Primary hue (brand pink ≈ 340°) — cycled by the easter egg */
   --primary-h: 340;
 
@@ -13,41 +28,72 @@
   --color-brand-pink-dim:   #B3004A;
   --color-brand-purple:     #8B0060;
   --color-brand-magenta:    #C4004E;
+  --color-brand-deep:       #100235;  /* deep-purple accent (was the page base) */
 
-  /* Surfaces — light mode */
-  --color-bg:          #faf8ff;
-  --color-bg-elevated: #ffffff;
-  --color-bg-subtle:   #f0ebff;
-  --color-bg-circle:   #e0d8ff;
-  --color-bg-overlay:  rgba(10, 2, 40, 0.60);
+  /* Surfaces — neutral black/grey */
+  --color-bg:          #121212;
+  --color-bg-elevated: #1C1C1E;
+  --color-bg-subtle:   #2A2A2C;
+  --color-bg-circle:   #1C1C1E;
+  --color-bg-overlay:  rgba(0, 0, 0, 0.80);
 
-  /* Foreground — light mode */
-  --color-fg-primary:   #1a0a3d;
-  --color-fg-secondary: rgba(26, 10, 61, 0.60);
-  --color-fg-tertiary:  rgba(26, 10, 61, 0.35);
-  --color-fg-disabled:  rgba(26, 10, 61, 0.20);
+  /* Foreground */
+  --color-fg-primary:   #FFFFFF;
+  --color-fg-secondary: rgba(255, 255, 255, 0.65);
+  --color-fg-tertiary:  rgba(255, 255, 255, 0.35);
+  --color-fg-disabled:  rgba(255, 255, 255, 0.20);
+  --color-fg-on-light:  #404040;
 
-  /* Borders — light mode */
-  --color-border:        rgba(26, 10, 61, 0.10);
-  --color-border-strong: rgba(26, 10, 61, 0.18);
-  --color-border-brand:  rgba(196, 0, 78, 0.30);
+  /* Borders */
+  --color-border:        rgba(255, 255, 255, 0.10);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-border-brand:  rgba(232, 0, 90, 0.35);
 
   /* Semantic */
-  --color-success: #16a34a;
-  --color-warning: #d97706;
-  --color-danger:  #dc2626;
-  --color-info:    #2563eb;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger:  #EF4444;
+  --color-info:    #3B82F6;
+
+  /* --- Short-form production aliases (map 1:1 to the long-form
+     tokens above; the canonical names used in production code) --- */
+  --bg:           #121212;
+  --surface:      #1C1C1E;
+  --surface-hi:   #2A2A2C;
+  --brand-deep:   #100235;
+  --app-backdrop: #0D0D0D;
+
+  --fill-1:        rgba(255, 255, 255, 0.04);
+  --fill-2:        rgba(255, 255, 255, 0.06);
+  --fill-3:        rgba(255, 255, 255, 0.09);
+  --divider:       rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --scroll-thumb:       rgba(255, 255, 255, 0.12);
+  --scroll-thumb-hover: rgba(255, 255, 255, 0.22);
+
+  --border:    rgba(255, 255, 255, 0.10);
+  --border-hi: rgba(255, 255, 255, 0.18);
+  --text:      rgba(255, 255, 255, 0.65);
+  --text-dim:  rgba(255, 255, 255, 0.35);
+  --text-hi:   #FFFFFF;
+
+  --accent:        #E8005A;
+  --accent-lo:     rgba(232, 0, 90, 0.12);
+  --accent-border: rgba(232, 0, 90, 0.35);
 
   /* Typography */
   --font-display: 'Nunito', 'Varela Round', sans-serif;
   --font-body:    'DM Sans', 'Inter', sans-serif;
   --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --display: var(--font-display);
+  --sans:    var(--font-body);
+  --mono:    var(--font-mono);
 
-  /* Shadows — light mode */
-  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.10);
-  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.14);
-  --shadow-glow-brand: 0 0 24px rgba(196, 0, 78, 0.15);
+  /* Shadows */
+  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.50);
+  --shadow-glow-brand: 0 0 24px rgba(232, 0, 90, 0.25);
 
   /* Border radius */
   --radius-sm:   4px;
@@ -56,73 +102,183 @@
   --radius-xl:   16px;
   --radius-2xl:  20px;
   --radius-full: 9999px;
+  --radius:      8px;
 
   /* Animation */
   --duration-fast: 150ms;
   --duration-base: 200ms;
   --duration-slow: 300ms;
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* === Legacy aliases — used by existing components === */
+  /* === Legacy aliases — consumed by the existing components.
+     They reference the tokens above, so they flip automatically
+     when the tokens are overridden for light mode. === */
   --background-color:         var(--color-bg);
   --header-background-color:  var(--color-bg-elevated);
   --content-background-color: var(--color-bg-elevated);
   --text-color:               var(--color-fg-primary);
   --text-secondary-color:     var(--color-fg-secondary);
   --border-color:             var(--color-border);
-  --link-color:               hsl(var(--primary-h), 100%, 38%);
-  --link-hover-color:         hsl(var(--primary-h), 100%, 45%);
+  --link-color:               hsl(var(--primary-h), 100%, 62%);
+  --link-hover-color:         hsl(var(--primary-h), 100%, 72%);
   --time-color:               var(--color-fg-secondary);
   --indicator-inactive-color: var(--color-fg-disabled);
-  --indicator-active-color:   var(--color-brand-magenta);
+  --indicator-active-color:   var(--color-brand-pink);
   --button-hover:             var(--color-bg-subtle);
   --card-shadow:              var(--shadow-md);
 }
 
-/* === Dark mode — primary design system surface === */
-:root.dark {
-  --primary-h: 340;
+/* ============================================================
+   LIGHT THEME
+   Applied when the OS prefers light AND the app hasn't chosen
+   (`:root:not([data-theme])`), or when light is forced
+   explicitly (`[data-theme="light"]`). Only theme-flipping
+   tokens change — brand hues, spacing, radius and the type
+   scale stay identical.
+   ============================================================ */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
 
-  /* Brand (same, just declaring for dark scope) */
-  --color-brand-pink:       #E8005A;
-  --color-brand-pink-light: #FF2E7A;
-  --color-brand-pink-dim:   #B3004A;
-  --color-brand-purple:     #8B0060;
-  --color-brand-magenta:    #C4004E;
+    --color-bg:          #faf8ff;
+    --color-bg-elevated: #ffffff;
+    --color-bg-subtle:   #f0ebff;
+    --color-bg-circle:   #EAE4F6;
+    --color-bg-overlay:  rgba(16, 2, 53, 0.40);
 
-  /* Surfaces */
-  --color-bg:          #100235;
-  --color-bg-elevated: #16063F;
-  --color-bg-subtle:   #1C0A52;
-  --color-bg-circle:   #180840;
-  --color-bg-overlay:  rgba(16, 2, 53, 0.85);
+    --color-fg-primary:   #1a0a3d;
+    --color-fg-secondary: rgba(26, 10, 61, 0.60);
+    --color-fg-tertiary:  rgba(26, 10, 61, 0.35);
+    --color-fg-disabled:  rgba(26, 10, 61, 0.20);
 
-  /* Foreground */
+    --color-border:        rgba(26, 10, 61, 0.10);
+    --color-border-strong: rgba(26, 10, 61, 0.18);
+    --color-border-brand:  rgba(196, 0, 78, 0.30);
+
+    --bg:           #faf8ff;
+    --surface:      #ffffff;
+    --surface-hi:   #f0ebff;
+    --app-backdrop: #ECE8F5;
+
+    --fill-1:        rgba(26, 10, 61, 0.04);
+    --fill-2:        rgba(26, 10, 61, 0.055);
+    --fill-3:        rgba(26, 10, 61, 0.08);
+    --divider:       rgba(26, 10, 61, 0.08);
+    --border-subtle: rgba(26, 10, 61, 0.09);
+    --scroll-thumb:       rgba(26, 10, 61, 0.18);
+    --scroll-thumb-hover: rgba(26, 10, 61, 0.30);
+
+    --border:    rgba(26, 10, 61, 0.10);
+    --border-hi: rgba(26, 10, 61, 0.18);
+    --text:      rgba(26, 10, 61, 0.60);
+    --text-dim:  rgba(26, 10, 61, 0.35);
+    --text-hi:   #1a0a3d;
+
+    --accent-lo: rgba(232, 0, 90, 0.10);
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+
+    --link-color:       hsl(var(--primary-h), 100%, 40%);
+    --link-hover-color: hsl(var(--primary-h), 100%, 47%);
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg:          #faf8ff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-subtle:   #f0ebff;
+  --color-bg-circle:   #EAE4F6;
+  --color-bg-overlay:  rgba(16, 2, 53, 0.40);
+
+  --color-fg-primary:   #1a0a3d;
+  --color-fg-secondary: rgba(26, 10, 61, 0.60);
+  --color-fg-tertiary:  rgba(26, 10, 61, 0.35);
+  --color-fg-disabled:  rgba(26, 10, 61, 0.20);
+
+  --color-border:        rgba(26, 10, 61, 0.10);
+  --color-border-strong: rgba(26, 10, 61, 0.18);
+  --color-border-brand:  rgba(196, 0, 78, 0.30);
+
+  --bg:           #faf8ff;
+  --surface:      #ffffff;
+  --surface-hi:   #f0ebff;
+  --app-backdrop: #ECE8F5;
+
+  --fill-1:        rgba(26, 10, 61, 0.04);
+  --fill-2:        rgba(26, 10, 61, 0.055);
+  --fill-3:        rgba(26, 10, 61, 0.08);
+  --divider:       rgba(26, 10, 61, 0.08);
+  --border-subtle: rgba(26, 10, 61, 0.09);
+  --scroll-thumb:       rgba(26, 10, 61, 0.18);
+  --scroll-thumb-hover: rgba(26, 10, 61, 0.30);
+
+  --border:    rgba(26, 10, 61, 0.10);
+  --border-hi: rgba(26, 10, 61, 0.18);
+  --text:      rgba(26, 10, 61, 0.60);
+  --text-dim:  rgba(26, 10, 61, 0.35);
+  --text-hi:   #1a0a3d;
+
+  --accent-lo: rgba(232, 0, 90, 0.10);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+
+  --link-color:       hsl(var(--primary-h), 100%, 40%);
+  --link-hover-color: hsl(var(--primary-h), 100%, 47%);
+}
+
+/* Explicit dark override — wins over prefers-color-scheme:light. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg:          #121212;
+  --color-bg-elevated: #1C1C1E;
+  --color-bg-subtle:   #2A2A2C;
+  --color-bg-circle:   #1C1C1E;
+  --color-bg-overlay:  rgba(0, 0, 0, 0.80);
+
   --color-fg-primary:   #FFFFFF;
   --color-fg-secondary: rgba(255, 255, 255, 0.65);
   --color-fg-tertiary:  rgba(255, 255, 255, 0.35);
   --color-fg-disabled:  rgba(255, 255, 255, 0.20);
 
-  /* Borders */
   --color-border:        rgba(255, 255, 255, 0.10);
   --color-border-strong: rgba(255, 255, 255, 0.18);
-  --color-border-brand:  rgba(232, 0, 90, 0.40);
+  --color-border-brand:  rgba(232, 0, 90, 0.35);
 
-  /* Semantic */
-  --color-success: #22C55E;
-  --color-warning: #F59E0B;
-  --color-danger:  #EF4444;
-  --color-info:    #3B82F6;
+  --bg:           #121212;
+  --surface:      #1C1C1E;
+  --surface-hi:   #2A2A2C;
+  --app-backdrop: #0D0D0D;
 
-  /* Shadows */
-  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.30);
-  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.40);
-  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.50);
-  --shadow-glow-brand: 0 0 24px rgba(232, 0, 90, 0.25);
+  --fill-1:        rgba(255, 255, 255, 0.04);
+  --fill-2:        rgba(255, 255, 255, 0.06);
+  --fill-3:        rgba(255, 255, 255, 0.09);
+  --divider:       rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --scroll-thumb:       rgba(255, 255, 255, 0.12);
+  --scroll-thumb-hover: rgba(255, 255, 255, 0.22);
 
-  /* Legacy aliases — dark overrides */
-  --link-color:       hsl(var(--primary-h), 100%, 55%);
-  --link-hover-color: hsl(var(--primary-h), 100%, 68%);
-  --time-color:       rgba(255, 255, 255, 0.65);
+  --border:    rgba(255, 255, 255, 0.10);
+  --border-hi: rgba(255, 255, 255, 0.18);
+  --text:      rgba(255, 255, 255, 0.65);
+  --text-dim:  rgba(255, 255, 255, 0.35);
+  --text-hi:   #FFFFFF;
+
+  --accent-lo: rgba(232, 0, 90, 0.12);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.50);
+
+  --link-color:       hsl(var(--primary-h), 100%, 62%);
+  --link-hover-color: hsl(var(--primary-h), 100%, 72%);
 }
 
 /* ============================================================
@@ -137,7 +293,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-bg);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--color-fg-primary);
   overflow-wrap: break-word;
@@ -522,7 +678,7 @@ h1 {
   border-radius: var(--radius-md);
   text-align: center;
   text-decoration: none;
-  background: rgba(232, 0, 90, 0.08);
+  background: var(--accent-lo);
   color: var(--link-color);
   cursor: pointer;
   border: 1px solid var(--color-border-brand);
@@ -648,10 +804,6 @@ h1 {
     height: 5vh;
   }
 
-  body {
-    font-size: 15px;
-  }
-
   #postHeader {
     padding: 10px;
     height: auto;
@@ -665,18 +817,14 @@ h1 {
 
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: var(--radius-full); }
-:root:not(.dark) ::-webkit-scrollbar-thumb { background: rgba(26,10,61,0.15); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.12) transparent;
+  scrollbar-color: var(--scroll-thumb) transparent;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-}
-
-:root:not(.dark) * {
-  scrollbar-color: rgba(26,10,61,0.15) transparent;
 }
 
 /* ============================================================

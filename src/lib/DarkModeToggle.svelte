@@ -2,30 +2,38 @@
   import { onMount } from 'svelte';
   import { isDark } from './theme';
 
-  // onMount: initialise the store value
+  // Design system theming: dark is the default. Apps that haven't
+  // chosen a theme follow the OS via `prefers-color-scheme`; an
+  // explicit choice is stored and applied as `data-theme` on <html>,
+  // which always overrides the system preference.
   onMount(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved !== null) {
-      isDark.set(saved === 'true');
-    } else {
-      isDark.set(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
-    applyTheme();
-  });
+    let choice = localStorage.getItem('theme'); // 'light' | 'dark' | null
 
-  function applyTheme() {
-    $isDark
-      ? document.documentElement.classList.add('dark')
-      : document.documentElement.classList.remove('dark');
-  }
+    // Migrate the legacy boolean key from the previous implementation.
+    if (choice !== 'light' && choice !== 'dark') {
+      const legacy = localStorage.getItem('darkMode');
+      if (legacy === 'true') choice = 'dark';
+      else if (legacy === 'false') choice = 'light';
+    }
+
+    if (choice === 'light' || choice === 'dark') {
+      document.documentElement.setAttribute('data-theme', choice);
+      isDark.set(choice === 'dark');
+    } else {
+      // No explicit choice — mirror what the CSS renders: light only
+      // when the OS explicitly prefers it, otherwise the dark default.
+      isDark.set(!window.matchMedia('(prefers-color-scheme: light)').matches);
+    }
+  });
 
   function toggleDarkMode() {
     isDark.update(v => {
       const next = !v;
-      localStorage.setItem('darkMode', next.toString());
+      const theme = next ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
       return next;
     });
-    applyTheme();
   }
 </script>
 
